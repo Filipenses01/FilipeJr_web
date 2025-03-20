@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>Calculadora FJ</title>
+  <link rel="stylesheet" href="index.css"/>
+</head>
+<style>
+body {
+  background: linear-gradient(to bottom, purple, pink);
+  text-align: center;
+  font-family: serif;
+  margin: 8px;
+  color: white;
+  opacity: 0;
+  transform: translateY(-25px);
+  animation: fadeIn 2s ease-in forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+h1 {
+  color: yellow;
+}
+
+input {
+  padding: 10px;
+  border: 2px solid green;
+  box-shadow: 0px 4px 8px rgba(0,0,0,0.9);
+}
+
+input::placeholder {
+  color: red;
+}
+
+.Caixa {
+  box-shadow: 0px 4px 8px rgba(0,0,0,0.9);
+  padding: 15px;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+button {
+  padding: 8px;
+  margin-top: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  box-shadow: 0px 4px 8px rgba(0,0,0,0.9);
+}
+
+button:hover {
+  background-color: springgreen;
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+.dark-mode {
+  background: black;
+  color: white;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+ul li {
+  background: rgba(255,255,255,0.2);
+  padding: 5px;
+  margin: 5px 0;
+  border-radius: 5px;
+}
+</style>
+<body>
+  <h1>Calculadora FJ</h1>
+  <div class="Caixa">
+    <label for="n1" id="A">Número 1:</label>
+    <input type="number" id="numero1" placeholder="Digite o primeiro número..." oninput="calcular()" required>
+    <br>
+
+    <label for="operador">Escolha o operador:</label>
+    <select id="operador" onchange="calcular()">
+      <option value="soma">Soma</option>
+      <option value="multiplicacao">Multiplicação</option>
+      <option value="divisao">Divisão</option>
+      <option value="subtracao">Subtração</option>
+    </select>
+    <br>
+
+    <label for="n2" id="A">Número 2:</label>
+    <input type="number" id="numero2" placeholder="Digite o segundo número..." oninput="calcular()" required>
+    <br>
+
+    <p>Resultado: <output id="resultado"></output></p>
+
+    <h3>Histórico:</h3>
+    <ul id="historico"></ul>
+
+    <button onclick="alternarTema()">Modo Escuro</button>
+    <button onclick="alert('Esse programa foi criado por Filipe JR')">Quem criou este programa?</button>
+  </div>
+
+ 
+</body>
+<script>
+
+
+function calcular() {
+  let n1 = parseFloat(document.getElementById('numero1').value) || 0;
+  let n2 = parseFloat(document.getElementById('numero2').value) || 0;
+  let operador = document.getElementById('operador').value;
+  let resultado = document.getElementById('resultado');
+
+  switch (operador) {
+    case "soma":
+      resultado.textContent = n1 + n2;
+      break;
+    case "multiplicacao":
+      resultado.textContent = n1 * n2;
+      break;
+    case "divisao":
+      if (n2 === 0) {
+        resultado.textContent = "Erro: Divisão por zero!";
+        return;
+      }
+      resultado.textContent = n1 / n2;
+      break;
+    case "subtracao":
+      resultado.textContent = n1 - n2;
+      break;
+  }
+
+  adicionarHistorico(n1, operador, n2, resultado.textContent);
+}
+
+function adicionarHistorico(n1, operador, n2, resultado) {
+  let historico = document.getElementById("historico");
+  let novoItem = document.createElement("li");
+  
+  let simbolo = {
+    "soma": "+",
+    "multiplicacao": "×",
+    "divisao": "÷",
+    "subtracao": "-"
+  }[operador];
+
+  novoItem.textContent = `${n1} ${simbolo} ${n2} = ${resultado}`;
+  historico.appendChild(novoItem);
+}
+
+function alternarTema() {
+  document.body.classList.toggle("dark-mode");
+}
+</script>
+</html>

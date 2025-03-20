@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site de Teste - Filipe Jr</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+button {
+    padding: 10px;
+    margin: 10px;
+    cursor: pointer;
+}
+
+table {
+    margin: auto;
+    width: 50%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid black;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin: auto;
+}
+
+</style>
+<body>
+    <header>
+        <h1>Site de Teste FJ</h1>
+        <p>Explorando funcionalidades interativas</p>
+    </header>
+
+    <main>
+        <section>
+            <h2>Botão Interativo</h2>
+            <button id="botao">Clique para mudar a cor</button>
+        </section>
+
+        <section>
+            <h2>Tabela Dinâmica</h2>
+            <button id="adicionar">Adicionar Linha</button>
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Idade</th>
+                    </tr>
+                </thead>
+                <tbody id="tabela">
+                    <tr>
+                        <td>Filipe Jr</td>
+                        <td>18</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section>
+            <h2>Formulário de Contato</h2>
+           <form action="https://formspree.io/f/mzzzkqlj" method="post">
+    <input type="text" name="nome" placeholder="Nome" required>
+    <input type="email" name="email" placeholder="E-mail" required>
+    <textarea name="mensagem" placeholder="Mensagem" required></textarea>
+    <button type="submit">Enviar</button>
+</form>
+        </section>
+    </main>
+</body>
+<script>
+document.getElementById("botao").addEventListener("click", function() {
+    this.style.backgroundColor = this.style.backgroundColor === "blue" ? "red" : "blue";
+});
+
+document.getElementById("adicionar").addEventListener("click", function() {
+    let tabela = document.getElementById("tabela");
+    let novaLinha = tabela.insertRow();
+    let celula1 = novaLinha.insertCell(0);
+    let celula2 = novaLinha.insertCell(1);
+    celula1.innerText = "Novo Nome FJ";
+    celula2.innerText = "20";
+});
+</script>
+</html>
